@@ -8,6 +8,7 @@ class GridViewPage extends StatefulWidget {
 
 class _GridViewPageState extends State<GridViewPage> {
   int _columnsCount = 2;
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +52,13 @@ class _GridViewPageState extends State<GridViewPage> {
           ),
           FloatingActionButton(
             heroTag: 'arrow_upward',
-            onPressed: () {},
+            onPressed: () {
+              _scrollController.animateTo(
+                0,
+                duration: const Duration(milliseconds: 600),
+                curve: Curves.easeInQuint,
+              );
+            },
             child: const Icon(
               Icons.arrow_upward,
               color: Colors.white,
@@ -60,6 +67,7 @@ class _GridViewPageState extends State<GridViewPage> {
         ],
       ),
       body: GridView.builder(
+        controller: _scrollController,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: _columnsCount,
           crossAxisSpacing: 10,
@@ -79,5 +87,11 @@ class _GridViewPageState extends State<GridViewPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }
