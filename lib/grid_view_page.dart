@@ -11,10 +11,43 @@ class _GridViewPageState extends State<GridViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          throw Exception('my error');
-        },
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          FloatingActionButton(
+            heroTag: 'grid_on',
+            onPressed: () {
+              // ignore: avoid_print
+              print("aaaa");
+            },
+            child: const Icon(
+              Icons.grid_on,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          FloatingActionButton(
+            heroTag: 'grid_off',
+            onPressed: () {},
+            child: const Icon(
+              Icons.grid_off,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          FloatingActionButton(
+            heroTag: 'arrow_upward',
+            onPressed: () {},
+            child: const Icon(
+              Icons.arrow_upward,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
