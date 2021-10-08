@@ -12,7 +12,10 @@ class _GridViewPageState extends State<GridViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+            '${_scrollController.hasClients ? _scrollController.position.pixels.toInt().toString() : 0} pixels'),
+      ),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
@@ -93,5 +96,13 @@ class _GridViewPageState extends State<GridViewPage> {
   void dispose() {
     _scrollController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    _scrollController.addListener(() {
+      setState(() {});
+    });
+    super.initState();
   }
 }
